@@ -1,4 +1,3 @@
-
 #include <map>
 #include <deque>
 #include <vector>
@@ -21,4 +20,4 @@ typedef struct PathNode{
 
 void setNodes();
 
-typedef map<size_t,deque<size_t> > routeMap; 
+typedef map<size_t,size_t > routeMap;
