@@ -35,25 +35,24 @@ class PriorityQueue{
 	
 	struct heapNode node[NODES+1];
    
-    unsigned int heapSize;
-	int indexMap[NODES];
-    //
+	unsigned int heapSize;
+      
 	void heapify(unsigned int index);//Me
 	
-    void swapNodes(unsigned int index,unsigned int smallest);
-	
-	public:
+	void swapNodes(unsigned int index,unsigned int smallest);
+    
+ public:
     PriorityQueue();
     PriorityQueue(unsigned int sourceNodeID, unsigned int nodeNo);   
     
     
-     
+    int indexMap[NODES];
     void extractMin();
     bool decreasepriority(unsigned int nodeID,unsigned int newpriority);//Me
     heapNode at(unsigned int nodeID);
-	unsigned int ind(unsigned int);//Me
-	void SetInd(unsigned int nodeID, int newIndx);//Me
-	heapNode getRoot();//Me
+    unsigned int ind(unsigned int);//Me
+    void SetInd(unsigned int nodeID, int newIndx);//Me
+    heapNode getRoot();//Me
 	
 };
 
