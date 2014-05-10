@@ -30,14 +30,15 @@ class PriorityQueue{
 	//for all nodes n, such that the node is in the heap, the parent of a node have a priority that is less than or equal to the priority of the node
 	
 	//invariant (\A unsigned int i: 0 <= i <= heapSize: node[i].priority >= node[1].priority)
-	//for all nodes n, the priority of the node is greater than or equal t the priority of the root. (Minimum heap)
+	//for all nodes i, the priority of the node is greater than or equal t the priority of the root. (Minimum heap)
 	
 	
 	struct heapNode node[NODES+1];
    
 	unsigned int heapSize;
+    int indexMap[NODES];
       
-	void heapify(unsigned int index);//Me
+	void heapify(unsigned int index);
 	
 	void swapNodes(unsigned int index,unsigned int smallest);
     
@@ -45,14 +46,12 @@ class PriorityQueue{
     PriorityQueue();
     PriorityQueue(unsigned int sourceNodeID, unsigned int nodeNo);   
     
-    
-    int indexMap[NODES];
     void extractMin();
-    bool decreasepriority(unsigned int nodeID,unsigned int newpriority);//Me
+    bool decreasepriority(unsigned int nodeID,unsigned int newpriority);
     heapNode at(unsigned int nodeID);
-    unsigned int ind(unsigned int);//Me
-    void SetInd(unsigned int nodeID, int newIndx);//Me
-    heapNode getRoot();//Me
+    unsigned int ind(unsigned int);
+    void SetInd(unsigned int nodeID, int newIndx);
+    heapNode getRoot();
 	
 };
 
