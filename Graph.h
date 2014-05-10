@@ -8,7 +8,7 @@ struct Plan{
   unsigned direction; /* Direction is unsigned integer which denotes direction as degrees*/
 };
 typedef vector< map <unsigned,Plan> > nodeMap;
-typedef std::vector<unsigned> routeMap;
+
 class Graph
 {
 	

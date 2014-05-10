@@ -2,20 +2,18 @@
 
 
 
-Dijkstra::Dijkstra(unsigned source, unsigned dest)
+Dijkstra::Dijkstra()
 {
-    sourceNode = source;
-    destNode = dest;
 	// Initializing RouteMap
     for(unsigned i=1;i<NODES;i++)
     {        
-        routes[i] = i;
+        predecessor[i] = i;
     }
    
 }
 
 // If the returned queue is empty, it means there is no direct path between source and destination
-std::deque<unsigned> Dijkstra::findShortest(const Graph& g)
+std::deque<unsigned> Dijkstra::findShortest(unsigned sourceNode, unsigned destNode, const Graph& g)
 {
     //requires (1 <= sourceNode <= Nodes && 1 <= destNode <= Nodes)
     //ensures 1 <= \result.size() <= Nodes
@@ -45,7 +43,7 @@ std::deque<unsigned> Dijkstra::findShortest(const Graph& g)
                 		if( newCost < oldCost)
                 		{
 	                		currentStatus.decreasepriority(currNeighbor,newCost);
-                    			routes[currNeighbor]= currentNode;
+                    			predecessor[currNeighbor]= currentNode;
                 		}
           		}
         }
@@ -61,7 +59,7 @@ std::deque<unsigned> Dijkstra::findShortest(const Graph& g)
 	NodeIterator = destNode;
     while (NodeIterator!=sourceNode) {
         shortestPath.push_front(NodeIterator);
-        NodeIterator = routes[NodeIterator];
+        NodeIterator = predecessor[NodeIterator];
     }
     shortestPath.push_front(NodeIterator);
     return shortestPath;

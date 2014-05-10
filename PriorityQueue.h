@@ -36,7 +36,7 @@ class PriorityQueue{
 	struct heapNode node[NODES+1];
    
     unsigned int heapSize;
-	
+	int indexMap[NODES];
     //
 	void heapify(unsigned int index);//Me
 	
@@ -46,7 +46,7 @@ class PriorityQueue{
     PriorityQueue();
     PriorityQueue(unsigned int sourceNodeID, unsigned int nodeNo);   
     
-    int indexMap[NODES];
+    
      
     void extractMin();
     bool decreasepriority(unsigned int nodeID,unsigned int newpriority);//Me

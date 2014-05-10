@@ -44,9 +44,9 @@ const int QueueSize = 4;
      pc.baud(115200);
      Navigate s;
      Graph g;
-    g.setNodes();
-     Dijkstra d(1,5);
-     std::deque<unsigned> shortestPath = d.findShortest(g);
+     g.setNodes();
+     Dijkstra d;
+     std::deque<unsigned> shortestPath = d.findShortest(1,5,g);
      currentNode = shortestPath.front();
      shortestPath.pop_front();
      
@@ -74,7 +74,7 @@ const int QueueSize = 4;
                 {
                     pc.printf("\r\nP, NodeID = %d\r\n", nodeID);
                     nextNode = false;        //setting the nextNode as false
-                    count++;                 //increasing count
+                    count++;                 //increasing count for taking average
                     rssi_sum = rssi_sum + rssi;  //calculating sum of rssi
                     /*adding four values in rssi and finding the average of rssi*/
                     if(count == 4)
@@ -106,25 +106,14 @@ const int QueueSize = 4;
                             {
                                 pc.printf("TXD\r\n");
                                 // Send counter value.
-                                txBuffer[8] = 'S';
+                                txBuffer[8] = 'S'; // stop sending the pings
                                 txBuffer[9] = currentNode;
                                 mrf.Send(txBuffer, 10);
                                   
                                 for(int i = 0; i<10; i++) {
                                   pc.printf("= %d \t " , txBuffer[i]);
                                 }
-                               
-                              /* if(shortestPath.size() >= 1)
-                                  {
-                                      size_t currNode = currentNode;
-                                      currentNode = shortestPath.front();
-                                      shortestPath.pop_front();
-                                      size_t neighbor = currentNode;
-                                      printf("direction to go for next node: %d",d.nodeGraph[currNode-1][neighbor-1].direction);
-                                  }
-                               else
-                                  break;
-                               */ 
+                            
                                 lastGreater = 0;
                                 nextNode = true;
                                 pingCount = 0;

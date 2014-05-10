@@ -3,19 +3,22 @@
 #include <map>
 #include "Graph.h"
 #include "PriorityQueue.h"
-/*Derived Class : Dijkstra inherits the base class Graph and inherits the data structure implementation of the 
-map of nodes, their paths along with cost and direction for each path between two nodes*/
-class Dijkstra// : public Graph
+
+typedef std::vector<unsigned> predMap;
+/*Class Dijkstra consists of the function findShortest to find the shortest path from source node to destination node 
+ such that the graph of the interconnection of nodes is passed as an const reference object to findShortest function */
+
+class Dijkstra
 {
     
 	private:	
         unsigned sourceNode;
         unsigned destNode;
-        routeMap routes;
+        predMap predecessor;
         
         public:
-        Dijkstra(unsigned, unsigned);
-        std::deque<unsigned> findShortest(const Graph&);
+        Dijkstra();
+        std::deque<unsigned> findShortest(unsigned sourceNode, unsigned destNode,const Graph&);
         	
 };
 

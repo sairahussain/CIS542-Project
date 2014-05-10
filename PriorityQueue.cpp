@@ -45,10 +45,7 @@ bool PriorityQueue::decreasepriority(unsigned int nodeID,unsigned int newpriorit
     if(indexMap[nodeID-1] != -1)
     {
         node[indexMap[nodeID-1]].priority = newpriority;
-        return true;
-    }
-     
-    unsigned int thisNode = indexMap[nodeID-1];
+        unsigned int thisNode = indexMap[nodeID-1];
     unsigned int parentNode = thisNode/2;
     
     
@@ -60,32 +57,14 @@ bool PriorityQueue::decreasepriority(unsigned int nodeID,unsigned int newpriorit
        parentNode = thisNode/2;
         
     }
-    
+        return true;
+    }
+     
+   
     
     return false;
 }
 
-/*void PriorityQueue::heapify(unsigned int parent)
-{
-   
-    
-    unsigned int smallest,left,right;
-    
-    left = 2*parent;
-    right = 2*parent + 1;
-    if(left <= heapSize && node[left].priority < node[parent].priority)
-        smallest = left;
-    else
-        smallest = parent;
-   
-    if(right <= heapSize && node[right].priority < node[smallest].priority)
-        smallest = right;
-    if(smallest != parent)
-    {
-        swapNodes(parent,smallest);
-        heapify(smallest);
-    }  
-}*/
 
 
 /* Iterative Solution heapify -  Given the index of parent it maintains the min heap structure*/
