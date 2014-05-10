@@ -5,7 +5,7 @@
 Dijkstra::Dijkstra()
 {
 	// Initializing RouteMap
-    for(unsigned i=1;i<NODES;i++)
+    for(unsigned int i=1;i<NODES;i++)
     {        
         predecessor[i] = i;
     }
@@ -13,7 +13,7 @@ Dijkstra::Dijkstra()
 }
 
 // If the returned queue is empty, it means there is no direct path between source and destination
-std::deque<unsigned> Dijkstra::findShortest(unsigned sourceNode, unsigned destNode, const Graph& g)
+std::deque<unsigned int> Dijkstra::findShortest(unsigned int sourceNode, unsigned int destNode, const Graph& g)
 {
     //requires (1 <= sourceNode <= Nodes && 1 <= destNode <= Nodes)
     //ensures 1 <= \result.size() <= Nodes
@@ -21,17 +21,15 @@ std::deque<unsigned> Dijkstra::findShortest(unsigned sourceNode, unsigned destNo
   
     PriorityQueue currentStatus(sourceNode,NODES);
     
-    unsigned currentNode,currNeighbor,newCost,oldCost;    
+    unsigned int currentNode,currNeighbor,newCost,oldCost;    
     currentNode = sourceNode;
     
-    map<unsigned,Plan>::iterator it;
+    map<unsigned int,Plan>::iterator it;
     while(currentStatus.indexMap[destNode-1] != -1)
     {
         for(it = g.nodeGraph[currentNode-1].begin(); it!= g.nodeGraph[currentNode-1].end();it++)
         {  
-            //invariant forall unsigned n: 1 <= n <= i && currentStatus[n-1] != -2: 
-            //             			(currentStatus[currentNode-1])+ p[currentNode-1][n-1].cost <= /old(currentStatus[n-1]) ? currentStatus[n-1] ==       
-            currNeighbor = it->first+1;
+            currNeighbor = it->first+1; //the Node ID of the node. Node ID is used as nodeID-1 for indexing later 
             
             // If the current neighbor is already visited, skip
 			if(currentStatus.indexMap[currNeighbor] != -1)
@@ -42,19 +40,21 @@ std::deque<unsigned> Dijkstra::findShortest(unsigned sourceNode, unsigned destNo
                 
                 		if( newCost < oldCost)
                 		{
-	                		currentStatus.decreasepriority(currNeighbor,newCost);
+	                		currentStatus.decreasepriority(currNeighbor,newCost);//change the current cost (priority) of the current neighbour to the new lower cost (priority)
                     			predecessor[currNeighbor]= currentNode;
                 		}
           		}
         }
-        currentStatus.extractMin();
-        currentStatus.SetInd(currentNode,-1);
+        currentStatus.extractMin(); 
+		//extract the current node which is at the root right now and has the minimum cost
+        currentStatus.SetInd(currentNode,-1); 
+		//since the current node has been extracted from the priority queue, we mark it visited by making its index -1
         currentNode = currentStatus.getRoot().nodeID;
     }
     
 	// Reverse the order of queue
-    unsigned NodeIterator;
-    deque<unsigned> shortestPath;
+    unsigned int NodeIterator;
+    deque<unsigned int> shortestPath;
 	
 	NodeIterator = destNode;
     while (NodeIterator!=sourceNode) {
